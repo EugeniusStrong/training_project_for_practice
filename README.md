@@ -1,16 +1,9 @@
 # training_project_for_practice
 
-A new Flutter project.
+# Описание проекта
 
-## Getting Started
+**Обучающий проект калькулятора, создавался для практики и тренировки. Фрэймворк Flutter**
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+|            Главное меню             |            Операция сложения            |           Операция умножения            |
+|:-----------------------------------:|:---------------------------------------:|:---------------------------------------:|
+| ![](./preview_images/main_menu.png) | ![](./preview_images/operation_one.png) | ![](./preview_images/operation_two.png) |

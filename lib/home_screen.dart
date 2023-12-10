@@ -21,14 +21,14 @@ class _HomeScreenState extends State<HomeScreen> {
     '1',
     '2',
     '3',
-    '*',
+    '×',
     '00',
     '0',
     '.',
-    '/',
+    '÷',
     'C',
-    '=',
     'DEL',
+    '=',
     '%',
   ];
 
@@ -39,7 +39,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Example'),
+        title: Text(
+          'C A L C U L A T O R',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 26,
+            color: Colors.blue[900],
+          ),
+        ),
         centerTitle: true,
       ),
       body: Column(
@@ -90,16 +97,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                         color: isNumber(_numbersButton[index])
-                            ? Colors.yellow
-                            : Colors.blue,
+                            ? Colors.grey[400]
+                            : Colors.blue[900],
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Center(
                         child: Text(
                           _numbersButton[index],
                           style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w400,
                             color: isNumber(_numbersButton[index])
                                 ? Colors.black
                                 : Colors.white,
@@ -145,7 +152,11 @@ class _HomeScreenState extends State<HomeScreen> {
           _displayText = _displayText.substring(0, _displayText.length - 1);
         }
       } else if (_numbersButton[index] == '=') {
-        calculateResult();
+        try {
+          calculateResult();
+        } catch (e) {
+          debugPrint('Ошибка при вычислении: $e');
+        }
       } else {
         bool isOperator = _numbersButton[index] == '+' ||
             _numbersButton[index] == '-' ||
@@ -168,10 +179,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void calculateResult() {
-    String result = _displayText;
+    String expression = _displayText;
+    expression = expression.replaceAll('÷', '/');
+    expression = expression.replaceAll('×', '*');
 
     Parser p = Parser();
-    Expression exp = p.parse(result);
+    Expression exp = p.parse(expression);
     ContextModel cm = ContextModel();
     double eval = exp.evaluate(EvaluationType.REAL, cm);
     _resultText = eval.toString();
